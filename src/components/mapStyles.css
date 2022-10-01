@@ -1,0 +1,62 @@
+.App{
+  position: relative;
+  margin: 0 auto;
+  height: 700px;
+  width: 1000px;
+}
+.map{
+  position: relative;
+  margin: 0 auto;
+}
+.road{
+  position: absolute;
+  top: 0;
+  left: 5%;
+  opacity: 1;
+}
+.bus_way1{
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  top: 78%;
+  left: 65%;
+  transition: transform .2s;
+}
+.bus_way2{
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  top: 28%;
+  left: 50%;
+  transition: transform .2s;
+}
+.bus_way3{
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  top: 42%;
+  left: 30%;
+  transition: transform .2s;
+}
+.bus_way4{
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  top: 5%;
+  left: 25%;
+  transition: transform .2s;
+}
+.bus_way5{
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transition: transform .2s;
+}
+.road:hover {opacity: 0.5;} 
+.bus_way1:hover {transform: scale(1.5);} 
+.bus_way2:hover {transform: scale(1.5);}
+.bus_way3:hover {transform: scale(1.5);}
+.bus_way4:hover {transform: scale(1.5);}
+.bus_way5:hover {transform: scale(1.5);}
