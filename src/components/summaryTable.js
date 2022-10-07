@@ -14,7 +14,7 @@ class SummaryTable extends React.Component{
   async componentDidMount() {
       
       try {
-        // https://magellan.ais.co.th/asgardpullmessagesapis/api/listen/thing?Key=8367724AE996DC0A35D386C801911DFB
+        // https://magellan.ais.co.th/asgardpullmessagesapis/api/listen/thing?Key=893747583B7E5DEF2297D252B52383DF
         let res = await fetch('http://127.0.0.1:5000/api/database/bus_info/summaryTable');
         let data = await res.json();
         this.setState({dataArr: data})
