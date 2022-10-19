@@ -2,7 +2,7 @@ import bus from "../images/smBus.png"
 import React from 'react'
 import {Link} from "react-router-dom"
 import '../App.css'
-import BM from "./busMap"
+// import BM from "./busMap"
 
 class SummaryTable extends React.Component{ 
 
@@ -15,7 +15,7 @@ class SummaryTable extends React.Component{
       
       try {
         // https://magellan.ais.co.th/asgardpullmessagesapis/api/listen/thing?Key=893747583B7E5DEF2297D252B52383DF
-        let res = await fetch('http://127.0.0.1:5000/api/database/bus_info/summaryTable');
+        let res = await fetch('https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable');
         let data = await res.json();
         this.setState({dataArr: data})
       }
@@ -29,32 +29,32 @@ class SummaryTable extends React.Component{
   getEachBusData = (e) =>{
       // console.log(e.currentTarget.id)
   }
-   
+
     
    render(){
    return (
     <main className="main-content position-relative border-radius-lg ">
     <div className='App-overtable' id="style-1">
-    <div class="container-fluid py-4 ">
+    <div className="container-fluid py-4 ">
     {/* <BM /> */}
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="d-flex card-header pb-0">
+      <div className="row">
+        <div className="col-12">
+          <div className="card mb-4">
+            <div className="d-flex card-header pb-0">
               <h6>Bus table</h6>
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
+            <div className="card-body px-0 pt-0 pb-2">
+              <div className="table-responsive p-0">
               
-                <table class="table align-items-center mb-0 ">
+                <table className="table align-items-center mb-0 ">
                   <thead>
                     <tr>
-                      <th class="text-xs font-weight-bold mb-0">Bus ID</th>
-                      <th class="text-xs font-weight-bold mb-0">Status</th>
-                      <th class="text-xs font-weight-bold mb-0">Current Passenger</th>
-                      {/* <th class="text-xs font-weight-bold mb-0">Schedule</th> */}
-                      <th class="text-xs font-weight-bold mb-0">Current Station</th>
-                      <th class="text-xs font-weight-bold mb-0">Next Station</th>
+                      <th className="text-xs font-weight-bold mb-0">Bus ID</th>
+                      <th className="text-xs font-weight-bold mb-0">Status</th>
+                      <th className="text-xs font-weight-bold mb-0">Current Passenger</th>
+                      {/* <th className="text-xs font-weight-bold mb-0">Schedule</th> */}
+                      <th className="text-xs font-weight-bold mb-0">Current Station</th>
+                      <th className="text-xs font-weight-bold mb-0">Next Station</th>
                       
                     </tr>
                   </thead>
@@ -62,6 +62,7 @@ class SummaryTable extends React.Component{
                     
                     {this.state.dataArr.map(value => {
                         let state_hover = "badge badge-sm bg-gradient-success"
+                        
                         if(value.status === "offline"){
                           state_hover = "badge badge-sm bg-gradient-danger"
                         }
@@ -69,39 +70,39 @@ class SummaryTable extends React.Component{
                           state_hover = "badge badge-sm bg-gradient-success"
                         }
                         return (
-                          <React.Fragment>
+                          <React.Fragment key={value.bus_id}>
                             <tr>
                                 <td> 
-                                  <div class=" px-4 py-1">
+                                  <div className=" px-4 py-1">
                                     <Link onClick={this.getEachBusData} id={value.bus_id} to="/Dashboard" state = {value.bus_id}>
                                       <div>
-                                        <img src={bus} class="navbar-brand-img h-100" alt="user1"/>
+                                        <img src={bus} className="navbar-brand-img h-100" alt="user1"/>
                                       </div>
                                       
-                                      <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">{value.bus_id}</h6>
-                                        {/* <p class="text-xs text-secondary mb-0">john@creative-tim.com</p> */}
+                                      <div className="d-flex flex-column justify-content-center">
+                                        <h6 className="mb-0 text-sm">{value.bus_id}</h6>
+                                        {/* <p className="text-xs text-secondary mb-0">john@creative-tim.com</p> */}
                                       </div>
                                     </Link>
                                   </div>
                                 </td>
-                                <td class="align-middle text-center text-sm">
-                                  <span class={state_hover}>{value.status}</span>
+                                <td className="align-middle text-center text-sm">
+                                  <span className={state_hover}>{value.status}</span>
                                 </td>
                                 <td>
-                                  <p class="text-xs font-weight-bold mb-0">{value.amount_user}</p>
-                                  {/* <p class="text-xs text-secondary mb-0">Organization</p> */}
+                                  <p className="text-xs font-weight-bold mb-0">{value.amount_user}</p>
+                                  {/* <p className="text-xs text-secondary mb-0">Organization</p> */}
                                 </td>
                                 
-                                {/* <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold">{value.date_time}</span>
+                                {/* <td className="align-middle text-center">
+                                  <span className="text-secondary text-xs font-weight-bold">{value.date_time}</span>
                                 </td> */}
-                                <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold">{value.current_location}</span>
+                                <td className="align-middle text-center">
+                                  <span className="text-secondary text-xs font-weight-bold">{value.current_location}</span>
                                 </td>
 
-                                <td class="align-middle text-center">
-                                  <span class="text-secondary text-xs font-weight-bold">{value.next_location}</span>
+                                <td className="align-middle text-center">
+                                  <span className="text-secondary text-xs font-weight-bold">{value.next_location}</span>
                                 </td>
                           </tr>
                         </React.Fragment>

@@ -10,15 +10,15 @@ import greenRoad from "../images/onlyRoadGreen.png"
 const busMap = () => {
     return (
         <div className='App'>
-                <img src={map} className="map"/>
-                <img src={greenRoad} className="road"/>
+                <img src={map} alt="map" className="map"/>
+                <img src={greenRoad} alt="green road" className="road"/>
                 
                 <Link  to="/Dashboard" >
-                    <img src={bus} className="bus_way1"/>
-                    <img src={bus} className="bus_way2"/>
-                    <img src={bus} className="bus_way3"/>
-                    <img src={bus} className="bus_way4"/>
-                    <img src={bus} className="bus_way5"/>
+                    <img src={bus} alt="bus icon" className="bus_way1"/>
+                    <img src={bus} alt="bus icon" className="bus_way2"/>
+                    <img src={bus} alt="bus icon" className="bus_way3"/>
+                    <img src={bus} alt="bus icon" className="bus_way4"/>
+                    <img src={bus} alt="bus icon" className="bus_way5"/>
                 </Link>
               
         </div>
