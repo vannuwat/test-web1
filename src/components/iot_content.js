@@ -14,7 +14,7 @@ class IotContent extends React.Component{
       
       try {
         // https://magellan.ais.co.th/asgardpullmessagesapis/api/listen/thing?Key=893747583B7E5DEF2297D252B52383DF
-        const res = await fetch('https://cors-anywhere.herokuapp.com/https://magellan.ais.co.th/asgardpullmessagesapis/api/listen/thing?Key=893747583B7E5DEF2297D252B52383DF')
+        const res = await fetch('https://server-vercel-oct-2022.vercel.app/api/database/magellan/sensor')
         let data = await res.json();
         this.setState({dataArr: data})
       }
@@ -29,7 +29,7 @@ class IotContent extends React.Component{
     <main className="main-content position-relative border-radius-lg ">
     <div className='App-overtable' id="style-1">
     <div className="container-fluid py-4 ">
-        {this.state.data}
+     
     </div>
     </div>
   </main>   

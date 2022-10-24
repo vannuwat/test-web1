@@ -11,24 +11,7 @@ import Iot from "./pages/iot_test";
 
 const App = () => {
   return (
-    // <Router>
-    //   <div>
-    //     <Link to="/">Home</Link>
-    //     <Link to="/about">About</Link>
-    //   </div>
-    //   <Routes>
-    //     <Route path="/" exact>
-    //       <Home />
-    //     </Route>
-
-    //     <Route path="/about" exact>
-    //       <About />
-    //     </Route>
-    //   </Routes>
-    // </Router>
-    // <Home />
     <Router>
-      {/* <a href="/home">Go to home page</a> */}
       <Routes>
         <Route path="/" element={<Table />} />
         <Route path="/Dashboard" element={<Dashboard />} />
