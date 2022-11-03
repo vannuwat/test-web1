@@ -2,7 +2,7 @@
 import "../assets/css/nucleo-icons.css"
 import "../assets/css/nucleo-svg.css"
 import "../assets/css/argon-dashboard.css"
-import "https://kit.fontawesome.com/42d5adcbca.js"
+// import "https://kit.fontawesome.com/42d5adcbca.js"
 import img2 from "../assets/img/illustrations/icon-documentation.svg"
 import React from 'react';
 import {Link} from "react-router-dom";
