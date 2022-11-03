@@ -23,7 +23,6 @@ export default function leafMap(){
             lineOptions: {
               styles: [{ color: "#6FA1EC", weight: 4 }]
             },
-            // show: true,
             collapsible: true,
             show: false, 
             showAlternatives: false,
@@ -108,7 +107,8 @@ export default function leafMap(){
       // <div className='App-overtable' id="style-1">
       //   <div className="container-fluid py-4 ">
           <div className="row">
-            <div className="col-xl-12 col-sm-12 mb-xl-0 mb-4">
+            <div className="col-xl-1 col-sm-0 mb-xl-0 mb-4"></div>
+            <div className="col-xl-10 col-sm-12 mb-xl-0 mb-4">
               <div className="card mb-4">
               <p className="text-sm mb-0 text-uppercase font-weight-bold">Thammasat Map</p>
               <div className="card-body p-3">
