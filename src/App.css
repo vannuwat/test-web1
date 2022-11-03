@@ -1,9 +1,12 @@
+.leaflet-container{
+  height: 80vmin;
+}
 .App {
   text-align: center;
   
 }
 .App-bg-graph{
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgb(0, 0, 0);
 }
 
 .App-overtable{
