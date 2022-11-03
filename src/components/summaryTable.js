@@ -2,7 +2,7 @@ import bus from "../images/smBus.png"
 import React from 'react'
 import {Link} from "react-router-dom"
 import '../App.css'
-// import BM from "./busMap"
+import IOT from "./iot_content"
 
 class SummaryTable extends React.Component{ 
 
@@ -36,7 +36,7 @@ class SummaryTable extends React.Component{
     <main className="main-content position-relative border-radius-lg ">
     <div className='App-overtable' id="style-1">
     <div className="container-fluid py-4 ">
-    {/* <BM /> */}
+    <IOT />
       <div className="row">
         <div className="col-12">
           <div className="card mb-4">
@@ -98,11 +98,11 @@ class SummaryTable extends React.Component{
                                   <span className="text-secondary text-xs font-weight-bold">{value.date_time}</span>
                                 </td> */}
                                 <td className="align-middle text-center">
-                                  <span className="text-secondary text-xs font-weight-bold">{value.current_location}</span>
+                                  <span className="text-xs font-weight-bold mb-0">{value.current_location}</span>
                                 </td>
 
                                 <td className="align-middle text-center">
-                                  <span className="text-secondary text-xs font-weight-bold">{value.next_location}</span>
+                                  <span className="text-xs font-weight-bold mb-0">{value.next_location}</span>
                                 </td>
                           </tr>
                         </React.Fragment>
