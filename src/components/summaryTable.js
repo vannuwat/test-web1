@@ -3,6 +3,7 @@ import React from 'react'
 import {Link} from "react-router-dom"
 import '../App.css'
 import IOT from "./iot_content"
+import Badge from 'react-bootstrap/Badge';
 
 class SummaryTable extends React.Component{ 
 
@@ -34,6 +35,8 @@ class SummaryTable extends React.Component{
    render(){
    return (
     <main className="main-content position-relative border-radius-lg ">
+    <div className="mt-3"></div>
+    <h3><Badge pill bg="primary">Bus Collection</Badge></h3>
     <div className='App-overtable' id="style-1">
     <div className="container-fluid py-4 ">
     <IOT />
@@ -111,10 +114,10 @@ class SummaryTable extends React.Component{
                          
                   </tbody>
                 </table>
-        
               </div>
             </div>
           </div>
+          <div className="mt-7"></div>
         </div>
       </div>
     </div>
