@@ -1,10 +1,11 @@
 import '../App.css'
 import React from 'react';
 // import location from "../images/location.png"
-
+import Button from 'react-bootstrap/Button';
 import moment from "moment";
 import Chart from 'chart.js/auto';
 import {Line, Bar} from 'react-chartjs-2';
+import {Link} from "react-router-dom";
 
 class contentPage extends React.Component{ 
 
@@ -288,6 +289,9 @@ class contentPage extends React.Component{
 
         return (
             <main className="main-content position-relative border-radius-lg ">
+            <div className="mt-3">
+            <Link to="/"><Button variant="primary">Go to home page</Button></Link>
+            </div>
             <div className='App-overtable' id="style-1">
             <div className="container-fluid py-4">
               <div className="row">
@@ -527,7 +531,7 @@ class contentPage extends React.Component{
 
                   return (
                     <React.Fragment key = {value.location}>
-                          <div className="col-xl-3 col-sm-3 mt-3">
+                          <div className="col-xs-12 col-sm-6 col-xl-3 mt-3">
                             <div className="card bg-dark text-white">
                               <div className="card-body">
                         
@@ -658,7 +662,7 @@ class contentPage extends React.Component{
                     </div>
                   </div>
                 </div>
-              
+                <div className="mt-7"></div>
               </div>
             </div>
             </div>
