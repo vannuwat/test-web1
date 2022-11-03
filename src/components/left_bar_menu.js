@@ -10,14 +10,14 @@ import {Link} from "react-router-dom";
 const LBM = () => {
   let hover1 = "nav-link active"
   let hover2 = "nav-link"
-  if(window.location.href === "http://localhost:3000/"){
+  if(window.location.href === "https://test-senior-web.vercel.app/"){
     hover1 = "nav-link active"
   }
-  else if (window.location.href === "http://localhost:3000/Dashboard"){
+  else if (window.location.href === "https://test-senior-web.vercel.app/Dashboard"){
     hover1 = "nav-link"
     hover2 = "nav-link"
   }
-  else if (window.location.href === "http://localhost:3000/iot"){
+  else if (window.location.href === "https://test-senior-web.vercel.app/iot"){
     hover1 = "nav-link"
     hover2 = "nav-link active"
   }
