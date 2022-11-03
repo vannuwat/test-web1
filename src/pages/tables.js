@@ -7,7 +7,7 @@ import STB from "../components/summaryTable"
 const table = () =>{
   return (
     <div className="App">
-      <LBM />
+//       <LBM />
       <STB />
     </div>
   )
