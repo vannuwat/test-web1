@@ -15,9 +15,8 @@ const Dashboard = (props) => {
 
   return (
     <div className='App'>
-//           <LBM />
           <CT dataFromParent = {state}/>
-      </div>
+     </div>
   );
 };
 
