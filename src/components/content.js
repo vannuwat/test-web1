@@ -1,6 +1,5 @@
 import '../App.css'
 import React from 'react';
-// import location from "../images/location.png"
 import Button from 'react-bootstrap/Button';
 import moment from "moment";
 import Chart from 'chart.js/auto';
@@ -11,7 +10,19 @@ class contentPage extends React.Component{
 
   constructor(props) {
     super(props);
-    this.state = { dataArr: [], dataArr2: [], dataArr3: [], dataGraphOv1: [], dataGraphOv2: [], dataGraphOv3: []};
+    this.state = {nowInfo: [], dataInfo: [], dataSortedLocation: [], dataSortedSchedule: [], dataGraphOv1: [], dataGraphOv2: [], dataGraphOv3: []};
+  }
+
+  async componentDidMount() {
+
+    Promise.all([
+      fetch(`https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable`).then(res => res.json()),
+      fetch(`https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable/${this.props.dataFromParent}`).then(res => res.json()),
+      fetch(`https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable/sorted_location/${this.props.dataFromParent}`).then(res => res.json()),
+      fetch(`https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable/sorted_schedule/${this.props.dataFromParent}`).then(res => res.json())
+    ]).then(([res0, res1, res2, res3]) => {
+      this.setState({nowInfo: res0, dataInfo: res1, dataSortedLocation: res2, dataSortedSchedule: res3})
+    })
   }
   
   data_ov1(){
@@ -35,9 +46,6 @@ class contentPage extends React.Component{
         legend: {
           labels: {
             color: "white",  
-            // font: {
-            //   size: 10
-            // }
           }
         }
       },
@@ -91,9 +99,6 @@ class contentPage extends React.Component{
         legend: {
           labels: {
             color: "white",  
-            // font: {
-            //   size: 10
-            // }
           }
         }
       },
@@ -118,28 +123,6 @@ class contentPage extends React.Component{
     )
   }
 
-  async componentDidMount() {
-      
-      // try {
-      //   // https://magellan.ais.co.th/asgardpullmessagesapis/api/listen/thing?Key=893747583B7E5DEF2297D252B52383DF
-      //   let res = await fetch(`http://127.0.0.1:5000/api/database/bus_info/summaryTable/${this.props.dataFromParent}`);
-      //   let data = await res.json();
-      //   this.setState({dataArr: data})
-      // }
-      // catch(error){
-      //   console.log(error)
-      // }
-
-      Promise.all([
-        fetch(`https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable/${this.props.dataFromParent}`).then(res => res.json()),
-        fetch(`https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable/sorted_location/${this.props.dataFromParent}`).then(res => res.json()),
-        fetch(`https://server-vercel-oct-2022.vercel.app/api/database/bus_info/summaryTable/sorted_schedule/${this.props.dataFromParent}`).then(res => res.json())
-      ]).then(([res1, res2, res3]) => {
-        this.setState({dataArr: res1, dataArr2: res2, dataArr3: res3})
-      })
-
-
-  }
 
   render(){
 
@@ -207,7 +190,7 @@ class contentPage extends React.Component{
     let accum_in_user8 = 0
     let accum_out_user8 = 0
 
-    this.state.dataArr.map(value => {
+    this.state.dataInfo.map(value => {
       const time = moment(value.schedule_date).utc().local().format('h:mm a');
       if (value.location === 'station1'){
         time_location1.push(time)
@@ -295,113 +278,103 @@ class contentPage extends React.Component{
             <div className='App-overtable' id="style-1">
             <div className="container-fluid py-4">
               <div className="row">
-                <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                  <div className="card">
-                    <div className="card-body p-3">
-                      <div className="row">
-                        <div className="col-8">
-                          <div className="numbers">
-                            <p className="text-sm mb-0 text-uppercase font-weight-bold">Bus Number</p>
-                            <h5 className="font-weight-bolder">
-                              888
-                            </h5>
-                            {/* <p className="mb-0">
-                              <span className="text-success text-sm font-weight-bolder">+543 </span>
-                              since last month
-                            </p> */}
+              {this.state.nowInfo.map(value => {
+                return(
+                  <React.Fragment key={value.bus_id}>
+                    <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div className="card">
+                      <div className="card-body p-3">
+                        <div className="row">
+                          <div className="col-8">
+                            <div className="numbers">
+                              <p className="text-sm mb-0 text-uppercase font-weight-bold">Bus Number</p>
+                              <h5 className="font-weight-bolder">
+                                {value.bus_id}
+                              </h5>
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-4 text-end">
-                          <div className="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                            <i className="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                  <div className="card">
-                    <div className="card-body p-3">
-                      <div className="row">
-                        <div className="col-8">
-                          <div className="numbers">
-                            <p className="text-sm mb-0 text-uppercase font-weight-bold">Now Passenger</p>
-                            <h5 className="font-weight-bolder">
-                              3
-                            </h5>
-                            {/* <p className="mb-0">
-                              <span className="text-success text-sm font-weight-bolder">+18 </span>
-                              since last 5 minutes
-                            </p> */}
-                          </div>
-                        </div>
-                        <div className="col-4 text-end">
-                          <div className="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                            <i className="ni ni-badge text-lg opacity-10" aria-hidden="true"></i>
+                          <div className="col-4 text-end">
+                            <div className="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                              <i className="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-xl-3 col-sm-6">
-                  <div className="card">
-                    <div className="card-body p-3">
-                      <div className="row">
-                        <div className="col-8">
-                          <div className="numbers">
-                            <p className="text-sm mb-0 text-uppercase font-weight-bold">Current Station</p>
-                            <h5 className="font-weight-bolder">
-                              Siit
-                            </h5>
-                            <p className="mb-0">
-                              {/* Next: <span className="text-success text-sm font-weight-bolder">TU dome</span>  */}
-                            </p>
+                  <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div className="card">
+                      <div className="card-body p-3">
+                        <div className="row">
+                          <div className="col-8">
+                            <div className="numbers">
+                              <p className="text-sm mb-0 text-uppercase font-weight-bold">Now Passenger</p>
+                              <h5 className="font-weight-bolder">
+                                {value.now_user}
+                              </h5>
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-4 text-end">
-                          <div className="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                            <i className="ni ni-pin-3 text-lg opacity-10" aria-hidden="true"></i>
+                          <div className="col-4 text-end">
+                            <div className="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                              <i className="ni ni-badge text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                  <div className="card">
-                    <div className="card-body p-3">
-                      <div className="row">
-                        <div className="col-8">
-                          <div className="numbers">
-                            <p className="text-sm mb-0 text-uppercase font-weight-bold">Next Station</p>
-                            <h5 className="font-weight-bolder">
-                              TU dome
-                            </h5>
-                            {/* <p className="mb-0">
-                              <span className="text-success text-sm font-weight-bolder">+18 </span>
-                              since last hour
-                            </p> */}
+                  <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div className="card">
+                      <div className="card-body p-3">
+                        <div className="row">
+                          <div className="col-8">
+                            <div className="numbers">
+                              <p className="text-sm mb-0 text-uppercase font-weight-bold">Current Station</p>
+                              <h5 className="font-weight-bolder">
+                              {value.location}
+                              </h5>
+                            </div>
                           </div>
-                        </div>
-                        <div className="col-4 text-end">
-                          <div className="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                            <i className="ni ni-circle-08 text-lg opacity-10" aria-hidden="true"></i>
+                          <div className="col-4 text-end">
+                            <div className="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                              <i className="ni ni-pin-3 text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                  <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div className="card">
+                      <div className="card-body p-3">
+                        <div className="row">
+                          <div className="col-8">
+                            <div className="numbers">
+                              <p className="text-sm mb-0 text-uppercase font-weight-bold">Next Station</p>
+                              <h5 className="font-weight-bolder">
+                              {value.next_location}
+                              </h5>
+                            </div>
+                          </div>
+                          <div className="col-4 text-end">
+                            <div className="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                              <i className="ni ni-pin-3 text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </React.Fragment>
+                )
+              })}
               </div>
-
               <div className="row mt-4">
               <div className="col-lg-4 "></div>
                 <div className="col-lg-4 mb-lg-0 mb-4">
                   <div className="card ">
                     <div className="card-body pb-0 p-3">
-                      <h6 className="mb-2"> Today's Overview Analysis </h6>
+                      <h6 className="mb-2"> Overview Analysis </h6>
                     </div>
                   </div>
                 </div>
@@ -418,14 +391,14 @@ class contentPage extends React.Component{
                 <div className="col-lg-4 mb-lg-0 mb-4">
                   <div className="card ">
                     <div className="card-body pb-0 p-3">
-                      <h6 className="mb-2"> Today's Station Analysis </h6>
+                      <h6 className="mb-2"> Station Analysis </h6>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="row mt-4">
-                {this.state.dataArr2.map(value => {
+                {this.state.dataSortedLocation.map(value => {
                       var time_location = [];
                       var now_user_location = [];
                       var in_user_location = [];
@@ -512,9 +485,6 @@ class contentPage extends React.Component{
                       legend: {
                         labels: {
                           color: "white",  
-                          // font: {
-                          //   size: 10
-                          // }
                         }
                       }
                     },
@@ -563,47 +533,38 @@ class contentPage extends React.Component{
                           <tr>
                             <td>
                               <div className="align-items-center">
-                                {/* <div>
-                                  <img src={location} alt="Country flag"/>
-                                </div> */}
                                 <div className="text-center">
                                   <p className="text-xs font-weight-bold mb-0">Date</p>
-                                  {/* <h6 className="text-sm mb-0">25/8/2022</h6> */}
                                 </div>
                               </div>
                             </td>
                             <td>
                               <div className="text-center">
                                 <p className="text-xs font-weight-bold mb-0">Current Passenger</p>
-                                {/* <h6 className="text-sm mb-0">6</h6> */}
                               </div>
                             </td>
                             <td>
                               <div className="text-center">
                                 <p className="text-xs font-weight-bold mb-0">Getting in Passenger</p>
-                                {/* <h6 className="text-sm mb-0">3</h6> */}
                               </div>
                             </td>
                             <td>
                               <div className="text-center">
                                 <p className="text-xs font-weight-bold mb-0">Getting out Passenger</p>
-                                {/* <h6 className="text-sm mb-0">0</h6> */}
                               </div>
                             </td>
                             <td className="align-middle text-sm">
                               <div className="col text-center">
                                 <p className="text-xs font-weight-bold mb-0">Station</p>
-                                {/* <h6 className="text-sm mb-0">Station 1</h6> */}
                               </div>
                             </td>
                             <td>
                               <div className="text-center">
                                 <p className="text-xs font-weight-bold mb-0">Time</p>
-                                {/* <h6 className="text-sm mb-0">10:59</h6> */}
                               </div>
                             </td>
                           </tr>
-                          {this.state.dataArr3.map(value => {
+                          {this.state.dataSortedSchedule.map(value => {
               
                               const day = moment(value.schedule_date).utc().local().format('DD/MM/YYYY');
                               const time = moment(value.schedule_date).utc().local().format('h:mm a');
@@ -613,42 +574,33 @@ class contentPage extends React.Component{
                                 <tr>
                                   <td>
                                     <div className="align-items-center">
-                                      {/* <div>
-                                        <img src={location} alt="Country flag"/>
-                                      </div> */}
                                       <div className="text-center">
-                                        {/* <p className="text-xs font-weight-bold mb-0">Date</p> */}
                                         <h6 className="text-sm mb-0">{day}</h6>
                                       </div>
                                     </div>
                                   </td>
                                   <td>
                                     <div className="text-center">
-                                      {/* <p className="text-xs font-weight-bold mb-0">Current Passenger</p> */}
                                       <h6 className="text-sm mb-0">{value.now_user}</h6>
                                     </div>
                                   </td>
                                   <td>
                                     <div className="text-center">
-                                      {/* <p className="text-xs font-weight-bold mb-0">Incoming Passenger</p> */}
                                       <h6 className="text-sm mb-0">{value.get_in_user}</h6>
                                     </div>
                                   </td>
                                   <td>
                                     <div className="text-center">
-                                      {/* <p className="text-xs font-weight-bold mb-0">Outgoing Passenger</p> */}
                                       <h6 className="text-sm mb-0">{value.get_out_user}</h6>
                                     </div>
                                   </td>
                                   <td className="align-middle text-sm">
                                     <div className="col text-center">
-                                      {/* <p className="text-xs font-weight-bold mb-0">Station</p> */}
                                       <h6 className="text-sm mb-0">{value.location}</h6>
                                     </div>
                                   </td>
                                   <td>
                                     <div className="text-center">
-                                      {/* <p className="text-xs font-weight-bold mb-0">Time</p> */}
                                       <h6 className="text-sm mb-0">{time}</h6>
                                     </div>
                                   </td>
