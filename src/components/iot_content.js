@@ -28,28 +28,28 @@ class leaftMap extends React.Component{
       let data = await res.json();
       this.setState({dataArr: data})
       {this.state.dataArr.map(value => {
-        if (value.location === 'Station1'){
+        if (value.location === "Station1"){
           this.setState({ bus_location: road[0]});
         }
-        else if (value.location === 'Station2'){
+        else if (value.location === "Station2"){
           this.setState({ bus_location: road[1]});
         }
         else if (value.location === "Station3"){
           this.setState({ bus_location: road[2]});
         }
-        else if (value.location === 'Station4'){
+        else if (value.location === "Station4"){
           this.setState({ bus_location: road[3]});
         }
-        else if (value.location === 'Station5'){
+        else if (value.location === "Station5"){
           this.setState({ bus_location: road[4]});
         }
-        else if (value.location === 'Station6'){
+        else if (value.location === "Station6"){
           this.setState({ bus_location: road[5]});
         }
-        else if (value.location === 'Station7'){
+        else if (value.location === "Station7"){
           this.setState({ bus_location: road[6]});
         }
-        else if (value.location === 'Station8'){
+        else if (value.location === "Station8"){
           this.setState({ bus_location: road[7]});
         }
         else{
