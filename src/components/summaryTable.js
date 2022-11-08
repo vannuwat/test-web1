@@ -89,7 +89,7 @@ class SummaryTable extends React.Component{
                                   <span className={state_hover}>{value.status}</span>
                                 </td>
                                 <td>
-                                  <p className="text-xs font-weight-bold mb-0">{value.total_passenger}</p>
+                                  <p className="text-xs font-weight-bold mb-0">{value.now_user}</p>
                                   {/* <p className="text-xs text-secondary mb-0">Organization</p> */}
                                 </td>
                                 
