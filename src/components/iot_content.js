@@ -1,47 +1,114 @@
-import { MapContainer, Rectangle, Polyline, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import React from 'react';
 import L from 'leaflet';
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "leaflet-routing-machine";
 
-export default function leafMap(){
-  // L.Marker.prototype.options.icon = L.icon({
-  //   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png"
-  // });
-  
-    const Routing = ({ sourceCity, destinationCity }) => {
+class leaftMap extends React.Component{ 
+
+  constructor(props) {
+    super(props);
+    this.state = { dataArr: [], bus_location: [14.066804016794256, 100.6136421528603]};
+  }
+  async componentDidMount() {
+    const road = [
+      [14.066804016794256, 100.6136421528603], 
+      [14.073538314651152, 100.61619694046351],
+      [14.072158205707805, 100.61266336251603],
+      [14.072119482153436, 100.60822693843608],
+      [14.07207505685738, 100.60220859290696],
+      [14.073349751429198, 100.60162458412518],
+      [14.077790013950462, 100.59422109216113],
+      [14.077297570784545, 100.5954167742865],
+    
+    ]
+    try {
+      // https://magellan.ais.co.th/asgardpullmessagesapis/api/listen/thing?Key=893747583B7E5DEF2297D252B52383DF
+      let res = await fetch('https://server-vercel-oct-2022.vercel.app/api/database/bus_info/now_data');
+      let data = await res.json();
+      this.setState({dataArr: data})
+      {this.state.dataArr.map(value => {
+        if (value.location === 'Station1'){
+          this.setState({ bus_location: road[0]});
+        }
+        else if (value.location === 'Station2'){
+          this.setState({ bus_location: road[1]});
+        }
+        else if (value.location === "Station3"){
+          this.setState({ bus_location: road[2]});
+        }
+        else if (value.location === 'Station4'){
+          this.setState({ bus_location: road[3]});
+        }
+        else if (value.location === 'Station5'){
+          this.setState({ bus_location: road[4]});
+        }
+        else if (value.location === 'Station6'){
+          this.setState({ bus_location: road[5]});
+        }
+        else if (value.location === 'Station7'){
+          this.setState({ bus_location: road[6]});
+        }
+        else if (value.location === 'Station8'){
+          this.setState({ bus_location: road[7]});
+        }
+        else{
+          this.setState({ bus_location: road[0]});
+        }
+
+      })}
+      
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+
+  render(){
+  const road = [
+    [14.066804016794256, 100.6136421528603], 
+    [14.073538314651152, 100.61619694046351],
+    [14.072158205707805, 100.61266336251603],
+    [14.072119482153436, 100.60822693843608],
+    [14.07207505685738, 100.60220859290696],
+    [14.073349751429198, 100.60162458412518],
+    [14.077790013950462, 100.59422109216113],
+    [14.077297570784545, 100.5954167742865],
+  ]
+
+  const Routing = ({ sourceCity, destinationCity }) => {
     const map = useMap();
   
-        if (!map) return;
-  
-        if ( sourceCity !== undefined && destinationCity !== undefined  ) {
-            const routingControl = L.Routing.control({
-            waypoints: [
-              L.latLng( parseFloat(sourceCity[0]), parseFloat(sourceCity[1]) ), 
-              L.latLng( parseFloat(destinationCity[0]), parseFloat(destinationCity[1]) )
-            ],
-            routeWhileDragging: true,
-            lineOptions: {
-              styles: [{ color: "#6FA1EC", weight: 4 }]
-            },
-            collapsible: true,
-            show: false, 
-            showAlternatives: false,
-            draggableWaypoints: false,
-            addWaypoints: false, 
-            fitSelectedRoutes: false,
-            createMarker: function () {
-              return null;
-            }
-          }).on('routesfound', function (e) {
-            const distance = e.routes[0].summary.totalDistance;
-            const time = e.routes[0].summary.totalTime;
-          }).addTo(map);
-          return () => map.removeControl(routingControl);
+    if (!map) return;
+
+    if ( sourceCity !== undefined && destinationCity !== undefined  ) {
+        const routingControl = L.Routing.control({
+        waypoints: [
+          L.latLng( parseFloat(sourceCity[0]), parseFloat(sourceCity[1]) ), 
+          L.latLng( parseFloat(destinationCity[0]), parseFloat(destinationCity[1]) )
+        ],
+        routeWhileDragging: true,
+        lineOptions: {
+          styles: [{ color: "#6FA1EC", weight: 4 }]
+        },
+        collapsible: true,
+        show: false, 
+        showAlternatives: false,
+        draggableWaypoints: false,
+        addWaypoints: false, 
+        fitSelectedRoutes: false,
+        createMarker: function () {
+          return null;
         }
+      }).on('routesfound', function (e) {
+        const distance = e.routes[0].summary.totalDistance;
+        const time = e.routes[0].summary.totalTime;
+      }).addTo(map);
+      return () => map.removeControl(routingControl);
+    }
         
 
   }
-  const bus_location = [14.074382578127263, 100.602303026015]
   const Thamasart_location = [14.074382578127263, 100.602303026015]
   const st1 = [14.068288259303996, 100.61489855485085] //ศูนย์ประชุม
   const st2 = [14.073890853178924, 100.61525961067149] //รพ. ธรรมศาสตร์
@@ -52,48 +119,8 @@ export default function leafMap(){
   const st7 = [14.077794206498844, 100.59421222926208] //Dorm A
   const st8 = [14.077300473526362, 100.59542215385805] //Dorm B
 
-  // const st1_st2 = [st1, st2]
-  // const st2_st3 = [st2, st3]
-  // const st3_st4 = [st3, st4]
-  // const st4_st5 = [st4, st5]
-  // const st5_st6 = [st5, st6]
-  // const st6_st7 = [st6, st7]
-  // const st7_st8 = [st7, st8]
-
-
-  const road = [
-    [14.066804016794256, 100.6136421528603], 
-    [14.073538314651152, 100.61619694046351],
-    [14.072158205707805, 100.61266336251603],
-    [14.072119482153436, 100.60822693843608],
-    [14.07207505685738, 100.60220859290696],
-    [14.073349751429198, 100.60162458412518],
-    [14.077790013950462, 100.59422109216113],
-    [14.077297570784545, 100.5954167742865],
-  
-  ]
-
-  // const polyline = [
-  //   [
-  //     [14.066787708550304, 100.61538298339187],
-  //     [14.066795978012196, 100.61613319252463],
-  //     [14.073259612030553, 100.61618501527722],
-  //   ],
-  //   [
-  //     [14.072208544566651, 100.61616702704045],
-  //     [14.072064720227546, 100.60164351638234],
-  //     [14.075989633852075, 100.6016119462992],
-  //   ]
-  // ]
-  // const limeOptions = { color: 'lime' }
-
-  // const rectangle = [
-  //   [14.066809746256668, 100.59317742724804],
-  //   [14.078182887101791, 100.6171028105571],
-  // ]
-  // const blackOptions = { color: 'black' }
-
   const myIcon = L.icon({
+    //  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png"
     iconUrl: require("../images/smBus.png"),
     iconSize: [50,32],
     iconAnchor: [20, 20],
@@ -101,11 +128,8 @@ export default function leafMap(){
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null
-});
+  });
   return(
-    // <main className="main-content position-relative border-radius-lg ">
-      // <div className='App-overtable' id="style-1">
-      //   <div className="container-fluid py-4 ">
           <div className="row">
             <div className="col-xl-1 col-sm-0 mb-xl-0 mb-4"></div>
             <div className="col-xl-10 col-sm-12 mb-xl-0 mb-4">
@@ -117,13 +141,11 @@ export default function leafMap(){
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   />
-                  <Marker icon={myIcon} position={road[0]}> 
+                  <Marker icon={myIcon} position={this.state.bus_location}> 
                     <Popup>
                       Bus 888 location <br /> at Thammasat Road.
                     </Popup>
                   </Marker>
-                  {/* <Polyline pathOptions={limeOptions} positions={polyline} /> */}
-                  {/* <Rectangle bounds={rectangle} pathOptions={blackOptions} /> */}
                   <Marker position={st1}>
                     <Popup>
                       Station 1 <br/> ศูนย์ประชุม
@@ -178,9 +200,8 @@ export default function leafMap(){
               </div>
             </div>
            </div>
-        //   </div>
-        // </div>
-      // </main>
   )
+  }
 }
 
+export default leaftMap

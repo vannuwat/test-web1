@@ -27,10 +27,6 @@ class SummaryTable extends React.Component{
 
   }
 
-  getEachBusData = (e) =>{
-      // console.log(e.currentTarget.id)
-  }
-
     
    render(){
    return (
@@ -93,7 +89,7 @@ class SummaryTable extends React.Component{
                                   <span className={state_hover}>{value.status}</span>
                                 </td>
                                 <td>
-                                  <p className="text-xs font-weight-bold mb-0">{value.amount_user}</p>
+                                  <p className="text-xs font-weight-bold mb-0">{value.total_passenger}</p>
                                   {/* <p className="text-xs text-secondary mb-0">Organization</p> */}
                                 </td>
                                 
@@ -101,7 +97,7 @@ class SummaryTable extends React.Component{
                                   <span className="text-secondary text-xs font-weight-bold">{value.date_time}</span>
                                 </td> */}
                                 <td className="align-middle text-center">
-                                  <span className="text-xs font-weight-bold mb-0">{value.current_location}</span>
+                                  <span className="text-xs font-weight-bold mb-0">{value.location}</span>
                                 </td>
 
                                 <td className="align-middle text-center">
