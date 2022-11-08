@@ -8,7 +8,7 @@ class leaftMap extends React.Component{
 
   constructor(props) {
     super(props);
-    this.state = { dataArr: [], bus_location: [14.066804016794256, 100.6136421528603]};
+    this.state = { dataArr: []};
   }
   async componentDidMount() {
     const road = [
@@ -27,36 +27,6 @@ class leaftMap extends React.Component{
       let res = await fetch('https://server-vercel-oct-2022.vercel.app/api/database/bus_info/now_data');
       let data = await res.json();
       this.setState({dataArr: data})
-      {this.state.dataArr.map(value => {
-        if (value.location === "Station1"){
-          this.setState({ bus_location: road[0]});
-        }
-        else if (value.location === "Station2"){
-          this.setState({ bus_location: road[1]});
-        }
-        else if (value.location === "Station3"){
-          this.setState({ bus_location: road[2]});
-        }
-        else if (value.location === "Station4"){
-          this.setState({ bus_location: road[3]});
-        }
-        else if (value.location === "Station5"){
-          this.setState({ bus_location: road[4]});
-        }
-        else if (value.location === "Station6"){
-          this.setState({ bus_location: road[5]});
-        }
-        else if (value.location === "Station7"){
-          this.setState({ bus_location: road[6]});
-        }
-        else if (value.location === "Station8"){
-          this.setState({ bus_location: road[7]});
-        }
-        else{
-          this.setState({ bus_location: road[0]});
-        }
-
-      })}
       
     }
     catch(error){
@@ -136,70 +106,105 @@ class leaftMap extends React.Component{
               <div className="card mb-4">
               <p className="text-sm mb-0 text-uppercase font-weight-bold">Thammasat Map</p>
               <div className="card-body p-3">
-                <MapContainer center={Thamasart_location} zoom={16} scrollWheelZoom={true}>
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <Marker icon={myIcon} position={this.state.bus_location}> 
-                    <Popup>
-                      Bus 888 location <br /> at Thammasat Road.
-                    </Popup>
-                  </Marker>
-                  <Marker position={st1}>
-                    <Popup>
-                      Station 1 <br/> ศูนย์ประชุม
-                    </Popup>
-                  </Marker>
-                  <Marker position={st2}>
-                    <Popup>
-                      Station 2 <br/> รพ. ธรรมศาสตร์
-                    </Popup>
-                  </Marker>
-                  <Marker position={st3}>
-                    <Popup>
-                      Station 3 <br/> สุขศาสตร์
-                    </Popup>
-                  </Marker>
-                  <Marker position={st4}>
-                    <Popup>
-                      Station 4 <br/> วิทยาศาสตร์
-                    </Popup>
-                  </Marker>
-                  <Marker position={st5}>
-                    <Popup>
-                      Station 5 <br/> Green canteen
-                    </Popup>
-                  </Marker>
-                  <Marker position={st6}>
-                    <Popup>
-                      Station 6 <br/> โดมบริหาร
-                    </Popup>
-                  </Marker>
-                  <Marker position={st7}>
-                    <Popup>
-                      Station 7 <br/> Dormitory A
-                    </Popup>
-                  </Marker>
-                  <Marker position={st8}>
-                    <Popup>
-                      Station 8 <br/> Dormitory B
-                    </Popup>
-                  </Marker>
-                  <Routing sourceCity={road[0]} destinationCity={road[1]}/>
-                  <Routing sourceCity={road[1]} destinationCity={road[2]}/>
-                  <Routing sourceCity={road[2]} destinationCity={road[3]}/>
-                  <Routing sourceCity={road[3]} destinationCity={road[4]}/>
-                  <Routing sourceCity={road[4]} destinationCity={road[5]}/>
-                  <Routing sourceCity={road[5]} destinationCity={road[6]}/>
-                  <Routing sourceCity={road[6]} destinationCity={road[7]}/>
-                  <Routing sourceCity={road[7]} destinationCity={road[8]}/>
+              {this.state.dataArr.map(value => {
+                let bus_location = road[0];
+                if (value.location === "Station1"){
+                  bus_location = road[0];
+                }
+                else if (value.location === "Station2"){
+                  bus_location = road[1];
+                }
+                else if (value.location === "Station3"){
+                  bus_location = road[2];
+                }
+                else if (value.location === "Station4"){
+                  bus_location = road[3];
+                }
+                else if (value.location === "Station5"){
+                  bus_location = road[4];
+                }
+                else if (value.location === "Station6"){
+                  bus_location = road[5];
+                }
+                else if (value.location === "Station7"){
+                  bus_location = road[6];
+                }
+                else if (value.location === "Station8"){
+                  bus_location = road[7];
+                }
+                else{
+                  bus_location = road[8];
+                }
+              return (
+                <React.Fragment key={value.bus_id}>
+                    <MapContainer center={Thamasart_location} zoom={16} scrollWheelZoom={true}>
+                      <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                      <Marker icon={myIcon} position={bus_location}> 
+                        <Popup>
+                          Bus 888 location <br /> at Thammasat Road.
+                        </Popup>
+                      </Marker>
+                      <Marker position={st1}>
+                        <Popup>
+                          Station 1 <br/> ศูนย์ประชุม
+                        </Popup>
+                      </Marker>
+                      <Marker position={st2}>
+                        <Popup>
+                          Station 2 <br/> รพ. ธรรมศาสตร์
+                        </Popup>
+                      </Marker>
+                      <Marker position={st3}>
+                        <Popup>
+                          Station 3 <br/> สุขศาสตร์
+                        </Popup>
+                      </Marker>
+                      <Marker position={st4}>
+                        <Popup>
+                          Station 4 <br/> วิทยาศาสตร์
+                        </Popup>
+                      </Marker>
+                      <Marker position={st5}>
+                        <Popup>
+                          Station 5 <br/> Green canteen
+                        </Popup>
+                      </Marker>
+                      <Marker position={st6}>
+                        <Popup>
+                          Station 6 <br/> โดมบริหาร
+                        </Popup>
+                      </Marker>
+                      <Marker position={st7}>
+                        <Popup>
+                          Station 7 <br/> Dormitory A
+                        </Popup>
+                      </Marker>
+                      <Marker position={st8}>
+                        <Popup>
+                          Station 8 <br/> Dormitory B
+                        </Popup>
+                      </Marker>
+                      <Routing sourceCity={road[0]} destinationCity={road[1]}/>
+                      <Routing sourceCity={road[1]} destinationCity={road[2]}/>
+                      <Routing sourceCity={road[2]} destinationCity={road[3]}/>
+                      <Routing sourceCity={road[3]} destinationCity={road[4]}/>
+                      <Routing sourceCity={road[4]} destinationCity={road[5]}/>
+                      <Routing sourceCity={road[5]} destinationCity={road[6]}/>
+                      <Routing sourceCity={road[6]} destinationCity={road[7]}/>
+                      <Routing sourceCity={road[7]} destinationCity={road[8]}/>
 
-                </MapContainer>
+                    </MapContainer>
+                </React.Fragment>
+                            )
+                    })}
                 </div>
               </div>
             </div>
            </div>
+
   )
   }
 }
