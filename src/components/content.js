@@ -192,7 +192,7 @@ class contentPage extends React.Component{
 
     this.state.dataInfo.map(value => {
       const time = moment(value.schedule_date).utc().local().format('h:mm a');
-      if (value.location === 'station1'){
+      if (value.location === 'Station1'){
         time_location1.push(time)
         now_user_location1.push(value.now_user)
         in_user_location1.push(value.get_in_user)
@@ -201,7 +201,7 @@ class contentPage extends React.Component{
         accum_in_user1 += value.get_in_user
         accum_out_user1 += value.get_out_user
       }
-      else if (value.location === 'station2'){
+      else if (value.location === 'Station2'){
         time_location2.push(time)
         now_user_location2.push(value.now_user)
         in_user_location2.push(value.get_in_user)
@@ -210,7 +210,7 @@ class contentPage extends React.Component{
         accum_in_user2 += value.get_in_user
         accum_out_user2 += value.get_out_user
       }
-      else if (value.location === 'station3'){
+      else if (value.location === 'Station3'){
         time_location3.push(time)
         now_user_location3.push(value.now_user)
         in_user_location3.push(value.get_in_user)
@@ -219,7 +219,7 @@ class contentPage extends React.Component{
         accum_in_user3 += value.get_in_user
         accum_out_user3 += value.get_out_user
       }
-      else if (value.location === 'station4'){
+      else if (value.location === 'Station4'){
         time_location4.push(time)
         now_user_location4.push(value.now_user)
         in_user_location4.push(value.get_in_user)
@@ -228,7 +228,7 @@ class contentPage extends React.Component{
         accum_in_user4 += value.get_in_user
         accum_out_user4 += value.get_out_user
       }
-      else if (value.location === 'station5'){
+      else if (value.location === 'Station5'){
         time_location5.push(time)
         now_user_location5.push(value.now_user)
         in_user_location5.push(value.get_in_user)
@@ -237,7 +237,7 @@ class contentPage extends React.Component{
         accum_in_user5 += value.get_in_user
         accum_out_user5 += value.get_out_user
       }
-      else if (value.location === 'station6'){
+      else if (value.location === 'Station6'){
         time_location6.push(time)
         now_user_location6.push(value.now_user)
         in_user_location6.push(value.get_in_user)
@@ -246,7 +246,7 @@ class contentPage extends React.Component{
         accum_in_user6 += value.get_in_user
         accum_out_user6 += value.get_out_user
       }
-      else if (value.location === 'station7'){
+      else if (value.location === 'Station7'){
         time_location7.push(time)
         now_user_location7.push(value.now_user)
         in_user_location7.push(value.get_in_user)
@@ -255,7 +255,7 @@ class contentPage extends React.Component{
         accum_in_user7 += value.get_in_user
         accum_out_user7 += value.get_out_user
       }
-      else if (value.location === 'station8'){
+      else if (value.location === 'Station8'){
         time_location8.push(time)
         now_user_location8.push(value.now_user)
         in_user_location8.push(value.get_in_user)
@@ -404,49 +404,49 @@ class contentPage extends React.Component{
                       var in_user_location = [];
                       var out_user_location = [];
 
-                      if (value.location === 'station1'){
+                      if (value.location === 'Station1'){
                         time_location = time_location1;
                         now_user_location = now_user_location1;
                         in_user_location = in_user_location1;
                         out_user_location = out_user_location1;
                       }
-                      else if (value.location === 'station2'){
+                      else if (value.location === 'Station2'){
                         time_location = time_location2;
                         now_user_location = now_user_location2;
                         in_user_location = in_user_location2;
                         out_user_location = out_user_location2;
                       }
-                      else if (value.location === 'station3'){
+                      else if (value.location === 'Station3'){
                         time_location = time_location3;
                         now_user_location = now_user_location3;
                         in_user_location = in_user_location3;
                         out_user_location = out_user_location3;
                       }
-                      else if (value.location === 'station4'){
+                      else if (value.location === 'Station4'){
                         time_location = time_location4;
                         now_user_location = now_user_location4;
                         in_user_location = in_user_location4;
                         out_user_location = out_user_location4;
                       }
-                      else if (value.location === 'station5'){
+                      else if (value.location === 'Station5'){
                         time_location = time_location5;
                         now_user_location = now_user_location5;
                         in_user_location = in_user_location5;
                         out_user_location = out_user_location5;
                       }
-                      else if (value.location === 'station6'){
+                      else if (value.location === 'Station6'){
                         time_location = time_location6;
                         now_user_location = now_user_location6;
                         in_user_location = in_user_location6;
                         out_user_location = out_user_location6;
                       }
-                      else if (value.location === 'station7'){
+                      else if (value.location === 'Station7'){
                         time_location = time_location7;
                         now_user_location = now_user_location7;
                         in_user_location = in_user_location7;
                         out_user_location = out_user_location7;
                       }
-                      else if (value.location === 'station8'){
+                      else if (value.location === 'Station8'){
                         time_location = time_location8;
                         now_user_location = now_user_location8;
                         in_user_location = in_user_location8;
